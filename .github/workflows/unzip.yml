@@ -1,0 +1,11 @@
+name: Unzip and Deploy
+on: [push]
+jobs:
+  unzip:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: unzip mein-kurs.zip -d .
+      - run: git add .
+      - run: git commit -m "Unzipped files"
+      - run: git push
