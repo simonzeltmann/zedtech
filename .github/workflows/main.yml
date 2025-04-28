@@ -1,0 +1,17 @@
+name: Unzip and Deploy
+on: 
+  push:
+    paths:
+      - '**.zip'  # Trigger bei ZIP-Uploads
+jobs:
+  unzip:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: unzip *.zip -d .  # Entpackt ALLE ZIPs
+      - run: git add .
+      - run: |
+        git config --global user.name "GitHub Actions"
+        git config --global user.email "actions@github.com"
+        git commit -m "Automatically unzipped files"
+        git push
